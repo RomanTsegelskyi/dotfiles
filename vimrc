@@ -1,7 +1,9 @@
 " => General {{{
 colorscheme badwolf
-
+filetype indent on		" load filetype specific indent files
+filetype plugin on
 syntax enable			" enable syntax processing
+set clipboard=unnamed   " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 " }}}
 " => VIM user interface {{{ 
 
@@ -15,8 +17,6 @@ set cindent				" special indent rules for C
 set number              " show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
-filetype indent on		" load filetype specific indent files
-filetype plugin on
 set showmatch			" highlight matching [{()}]
 set lazyredraw          " redraw only when we need to.
 
@@ -97,6 +97,9 @@ nnoremap <leader>u :GundoToggle<CR>
 
 " open ag.vim
 nnoremap <leader>a :Ag
+
+" fast save
+nmap <leader>w :w!<cr>
 " }}}
 " => Autogroups {{{
 augroup configgroup
