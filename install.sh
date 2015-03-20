@@ -29,3 +29,12 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# reinstall vim plugins
+git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
+git clone https://github.com/mhinz/vim-signify ~/.vim/bundle/vim-signify
+git clone https://github.com/rking/ag.vim ~/.vim/bundle/ag
+git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
+git clone http://github.com/sjl/gundo.vim.git ~/.vim/bundle/gundo
+git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
+git clone git://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
