@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/romantsegelskyi/RProject/wd'
-let g:netrw_dirhist_2='/Users/romantsegelskyi/RProject'
-let g:netrw_dirhist_3='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap'
-let g:netrw_dirhist_4='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap/lib'
-let g:netrw_dirhist_5='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap'
-let g:netrw_dirhist_6='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap/src'
-let g:netrw_dirhist_7='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap'
-let g:netrw_dirhist_8='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap/bin'
-let g:netrw_dirhist_9='/Users/romantsegelskyi/Dropbox/Purdue/Courses/CS541/cs541buffermanager-read-only/Heap'
+let g:netrw_dirhist_cnt =0

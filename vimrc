@@ -87,7 +87,7 @@ let mapleader=","       " leader is comma
 inoremap jk <esc>
 
 " paste without indent
-set pastetoggle=<C-S-P>
+set pastetoggle=<leader>p
 
 " save session
 nnoremap <leader>s :mksession<CR>
@@ -100,6 +100,9 @@ nnoremap <leader>a :Ag
 
 " fast save
 nmap <leader>w :w!<cr>
+
+" fast exit and save is needed
+nmap <leader>x :x<cr>
 " }}}
 " => Autogroups {{{
 augroup configgroup
