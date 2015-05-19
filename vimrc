@@ -42,6 +42,7 @@ set omnifunc=syntaxcomplete#Complete
 " }}}
 " => Launch Config {{{
 call pathogen#infect()                      " use pathogen
+autocmd VimEnter * call AirlineInit()       " initialize airline
 " }}}
 " => Searching {{{
 set incsearch           " search as characters are entered
@@ -169,13 +170,14 @@ let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 1
 " }}}
 " => Airline {{{
-
 function! AirlineInit()
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}
     endif
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#tagbar#enabled = 1
+    let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline_powerline_fonts=1
     let g:airline_left_sep = ''
     let g:airline_left_alt_sep = ''
@@ -195,6 +197,27 @@ function! AirlineInit()
     let g:airline_section_y = airline#section#create(['%B'])
     let g:airline_section_z = airline#section#create_right(['%l','%c'])
 endfunction
-autocmd VimEnter * call AirlineInit()
 " }}}
+"  => BufferManagement {{{
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+"
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+"
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+"
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+"
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+"
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+"  }}}
 " vim:foldmethod=marker:foldlevel=0
