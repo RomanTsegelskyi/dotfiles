@@ -39,3 +39,4 @@ git clone http://github.com/sjl/gundo.vim.git ~/.vim/bundle/gundo
 git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
 git clone git://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
 git clone https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
+git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
