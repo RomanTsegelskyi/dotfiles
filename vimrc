@@ -4,6 +4,7 @@ filetype indent on		" load filetype specific indent files
 filetype plugin on
 syntax enable			" enable syntax processing
 set clipboard=unnamed   " Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set shell=/bin/sh
 " }}}
 " => VIM user interface {{{ 
 
@@ -19,6 +20,8 @@ set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set showmatch			" highlight matching [{()}]
 set lazyredraw          " redraw only when we need to.
+
+set backspace=indent,eol,start
 
 " Different cursor in different modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -39,6 +42,7 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set omnifunc=syntaxcomplete#Complete
+let g:neocomplete#enable_at_startup = 1
 " }}}
 " => Launch Config {{{
 call pathogen#infect()                      " use pathogen
@@ -130,6 +134,20 @@ augroup configgroup
     autocmd BufEnter *.sh setlocal tabstop=2
     autocmd BufEnter *.sh setlocal shiftwidth=2
     autocmd BufEnter *.sh setlocal softtabstop=2
+    au FileType go nmap <leader>r <Plug>(go-run)
+    au FileType go nmap <leader>b <Plug>(go-build)
+    au FileType go nmap <leader>t <Plug>(go-test)
+    au FileType go nmap <leader>c <Plug>(go-coverage)
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+    au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+    au FileType go nmap <Leader>gd <Plug>(go-doc)
+    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+    au FileType go nmap <Leader>gi <Plug>(go-import)
+    au FileType go nmap <Leader>s <Plug>(go-implements)
+    au FileType go nmap <Leader>i <Plug>(go-info)
+    au FileType go nmap <Leader>e <Plug>(go-rename)
 augroup END
 " }}}
 " => Backups {{{ 
@@ -219,5 +237,13 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 "
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
+"  }}}
+"  => Go Options {{{
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 "  }}}
 " vim:foldmethod=marker:foldlevel=0

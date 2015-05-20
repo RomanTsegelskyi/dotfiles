@@ -40,3 +40,4 @@ git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
 git clone git://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
 git clone https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
 git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
+git clone https://github.com/Shougo/neocomplete.vim.git ~/.vim/bundle/neocomplete.vim
