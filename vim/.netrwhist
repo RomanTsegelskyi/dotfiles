@@ -1,11 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/romantsegelskyi/dotfiles/vim'
-let g:netrw_dirhist_2='/Users/romantsegelskyi/dotfiles'
-let g:netrw_dirhist_3='/Users/romantsegelskyi/dotfiles/vim'
-let g:netrw_dirhist_4='/Users/romantsegelskyi/RProject/r-vms/expR/tests/capture'
-let g:netrw_dirhist_5='/Users/romantsegelskyi/RProject/r-vms/expR/src/library/methods/R'
-let g:netrw_dirhist_6='/Users/romantsegelskyi/rust'
-let g:netrw_dirhist_7='/Users/romantsegelskyi/rustlang/rustfmt/tests'
-let g:netrw_dirhist_8='/Users/romantsegelskyi/romantsegelskyi.github.io/images'
-let g:netrw_dirhist_9='/Users/romantsegelskyi/dotfiles'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/romantsegelskyi/dotfiles/vim/bundle/ultisnips/pythonx/UltiSnips/snippet/source'
+let g:netrw_dirhist_2='/Users/romantsegelskyi/dotfiles/vim/bundle/ultisnips/pythonx/UltiSnips/snippet/source/file'
+let g:netrw_dirhist_3='/Users/romantsegelskyi/RProject/r-vms/R1/sgen/2015-05-30 12:03:00'
+let g:netrw_dirhist_4='/Users/romantsegelskyi/blog/_posts'

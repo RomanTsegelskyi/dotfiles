@@ -52,4 +52,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # mxtools PATH
 export PATH="/Users/romantsegelskyi/Dropbox/RProject/mxtool2/:$PATH"
 
-export GOPATH="/Users/romantsegelskyi/golang/gopath"
+# go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

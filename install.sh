@@ -41,3 +41,6 @@ git clone git://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutte
 git clone https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
 git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
 git clone https://github.com/Shougo/neocomplete.vim.git ~/.vim/bundle/neocomplete.vim
+git clone git@github.com:ervandew/supertab.git ~/.vim/bundle/supertab
+git clone git@github.com:SirVer/ultisnips.git ~/.vim/bundle/ultisnips
+git clone git@github.com:majutsushi/tagbar.git ~/.vim/bundle/tagbar
