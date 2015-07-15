@@ -106,6 +106,9 @@ nnoremap <leader>a :Ag
 " fast save
 nmap <leader>w :w!<cr>
 
+" fast exit
+nmap <leader>q :q!<cr>
+
 " fast exit and save is needed
 nmap <leader>x :x<cr>
 " }}}

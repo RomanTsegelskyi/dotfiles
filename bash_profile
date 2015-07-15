@@ -34,20 +34,8 @@ xUnmount(){
 	umount ~/CSMachine/
 }
 
-
-# Pebble SDK
-export PATH=/Users/romantsegelskyi/pebble-dev/PebbleSDK-current/bin:$PATH
-
-##
-# Your previous /Users/romantsegelskyi/.bash_profile file was backed up as /Users/romantsegelskyi/.bash_profile.macports-saved_2014-09-27_at_18:33:58
-##
-
-# MacPorts Installer addition on 2014-09-27_at_18:33:58: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-# OPAM configuration
-. /Users/romantsegelskyi/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+# homebrew path
+export PATH=/usr/local/bin:$PATH
 
 # mxtools PATH
 export PATH="/Users/romantsegelskyi/Dropbox/RProject/mxtool2/:$PATH"
@@ -56,3 +44,7 @@ export PATH="/Users/romantsegelskyi/Dropbox/RProject/mxtool2/:$PATH"
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# aliases
+alias prp='cd ~/Programming/rstats/pander; pwd'
+alias prt='cd ~/Programming/rstats/testr; pwd'
