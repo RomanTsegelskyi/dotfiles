@@ -46,5 +46,12 @@ export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # aliases
+alias c='cd'
 alias prp='cd ~/Programming/rstats/pander; pwd'
 alias prt='cd ~/Programming/rstats/testr; pwd'
+alias wp='cd ~/Writing/pi-blog'
+alias ww='cd ~/Writing/romantsegelskyi.github.io'
+alias pr='cd ~/Programming/rstats; pwd'
+alias pg='cd ~/Programming/golang; pwd'
+alias ps='cd ~/Programming/scala; pwd'
+alias pp='cd ~/Programming/perl; pwd'

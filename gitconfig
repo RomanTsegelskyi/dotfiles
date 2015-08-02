@@ -37,6 +37,7 @@
     tags = tag -l
     branches = branch -a
     remotes = remote -v
+	diff = diff -name-only
 
 [apply]
 
@@ -60,6 +61,7 @@
     # Prevent showing files whose names contain non-ASCII symbols as unversioned.
     # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
     precomposeunicode = false
+	editor = vim
 
 [color]
 
@@ -129,3 +131,6 @@
 [url "git://gist.github.com/"]
 
     insteadOf = "gist:"
+
+[diff]
+    name-only=true
