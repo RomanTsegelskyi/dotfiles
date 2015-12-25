@@ -1,14 +1,24 @@
 #!/bin/bash
 ############################
-# .make.sh
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# install.sh
+# This script creates symlinks from the home directory to any desired dotfiles in ~/Code/dotfiles
 ############################
 
 ########## Variables
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-files="vimrc vim gitconfig bash_profile gitignore"    # list of files/folders to symlink in homedir
+dir=~/Code/dotfiles                    			# dotfiles directory
+olddir=~/.dotfiles_old                 			# old dotfiles backup directory
+files="vimrc gitconfig bash_profile gitignore"  # list of files/folders to symlink in homedir
+vimdir=~/.vim/bundle
+github=https://github.com
+
+function install_vim_package {
+  package=$1
+  folder=$2
+  if [ ! -d "$vimdir/$folder" ]; then
+    git clone "$github/$package" "$vimdir/$folder"
+  fi
+}
 
 ##########
 
@@ -23,22 +33,22 @@ cd $dir
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
+    mv ~/.$file $olddir
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
 
 # reinstall vim plugins
-git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
-git clone https://github.com/mhinz/vim-signify ~/.vim/bundle/vim-signify
-git clone https://github.com/rking/ag.vim ~/.vim/bundle/ag
-git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-git clone http://github.com/sjl/gundo.vim.git ~/.vim/bundle/gundo
-git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
-git clone git://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
-git clone https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
-git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
-git clone https://github.com/Shougo/neocomplete.vim.git ~/.vim/bundle/neocomplete.vim
-git clone git@github.com:ervandew/supertab.git ~/.vim/bundle/supertab
-git clone git@github.com:SirVer/ultisnips.git ~/.vim/bundle/ultisnips
-git clone git@github.com:majutsushi/tagbar.git ~/.vim/bundle/tagbar
+install_vim_package bling/vim-airline vim-airline
+install_vim_package mhinz/vim-signify vim-signify
+install_vim_package rking/ag.vim ag
+install_vim_package kien/ctrlp.vim.git ctrlp.vim
+install_vim_package sjl/gundo.vim.git gundo
+install_vim_package tpope/vim-fugitive.git vim-fugitive
+install_vim_package airblade/vim-gitgutter.git vim-gitgutter
+install_vim_package rust-lang/rust.vim.git rust.vim
+install_vim_package fatih/vim-go.git vim-go
+install_vim_package Shougo/neocomplete.vim.git neocomplete.vim
+install_vim_package ervandew/supertab.git supertab
+install_vim_package SirVer/ultisnips.git ultisnips
+install_vim_package majutsushi/tagbar.git tagbar

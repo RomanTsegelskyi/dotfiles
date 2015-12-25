@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/romantsegelskyi/dotfiles/vim/bundle/ultisnips/pythonx/UltiSnips/snippet/source'
-let g:netrw_dirhist_2='/Users/romantsegelskyi/dotfiles/vim/bundle/ultisnips/pythonx/UltiSnips/snippet/source/file'
-let g:netrw_dirhist_3='/Users/romantsegelskyi/RProject/r-vms/R1/sgen/2015-05-30 12:03:00'
-let g:netrw_dirhist_4='/Users/romantsegelskyi/blog/_posts'
-let g:netrw_dirhist_5='/Users/romantsegelskyi/Programming/rstats/pander'
-let g:netrw_dirhist_6='/Users/romantsegelskyi/Programming/rstats/testr/tests'

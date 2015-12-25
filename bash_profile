@@ -55,3 +55,5 @@ alias pr='cd ~/Programming/rstats; pwd'
 alias pg='cd ~/Programming/golang; pwd'
 alias ps='cd ~/Programming/scala; pwd'
 alias pp='cd ~/Programming/perl; pwd'
+export PATH=/usr/local/bin:$PATH
+PATH="/usr/local/bin:/usr/local/bin:/Users/romantsegelskyi/Dropbox/RProject/mxtool2/:/usr/local/bin:/usr/local/bin:/Users/romantsegelskyi/Dropbox/RProject/mxtool2/:/usr/local/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Library/TeX/texbin:/usr/local/go/bin:/Users/romantsegelskyi/.go/bin:/usr/local/go/bin:/Users/romantsegelskyi/.go/bin"
