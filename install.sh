@@ -6,12 +6,14 @@
 
 ########## Variables
 
-dir=~/Code/dotfiles                    			# dotfiles directory
-olddir=~/.dotfiles_old                 			# old dotfiles backup directory
-files="vimrc gitconfig bash_profile gitignore"  # list of files/folders to symlink in homedir
+dir=~/Code/dotfiles                    			
+olddir=~/.dotfiles_old                 			
+# list of files/folders to symlink in homedir
+files="vimrc gitconfig bash_profile gitignore zshrc"
 vimdir=~/.vim/bundle
 github=https://github.com
 tempdotfiles="$TMPDIR/dotfiles"
+backup=0
 
 function install_vim_package {
   link=$1
@@ -31,7 +33,7 @@ function install_vim_package {
 for i in "$@"
 do
 case $i in
-	-b=|--backup)
+	-b|--backup)
     backup=1
     shift
     ;;
@@ -39,6 +41,8 @@ case $i in
     ;;
 esac
 done
+
+echo "backup - $backup"
 
 if [ $backup ] && [ ! -d "$olddir" ]; then
 	echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -50,7 +54,8 @@ echo "Changing to the $dir directory"
 mkdir -p $tempdotfiles
 cd $dir
 for file in $files; do
-    if [ $backup ]; then
+    echo $file
+    if [ $backup ] && [ -e ~/.$file ]; then
     	echo "Moving any existing dotfiles from ~ to $olddir"
     	mv ~/.$file $olddir
     fi
@@ -63,10 +68,13 @@ for file in $files; do
         echo "File backed up or symlink, so removing it"
         rm ~/.$file
       fi
-	    echo "Creating symlink to $file in home directory."
-    	ln -s $dir/$file ~/.$file
 	 fi
+  echo "Creating symlink to $file in home directory."
+  ln -s $dir/$file ~/.$file
+  echo
 done
+
+exit 0
 
 # reinstall vim plugins
 mkdir -p $vimdir
