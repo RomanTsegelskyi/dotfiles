@@ -9,7 +9,7 @@
 dir=~/Code/dotfiles                    			
 olddir=~/.dotfiles_old                 			
 # list of files/folders to symlink in homedir
-files="vimrc gitconfig bash_profile gitignore zshrc vim"
+files="vimrc gitconfig gitignore zshrc vim"
 vimdir=~/.vim/bundle
 github=https://github.com
 tempdotfiles="$TMPDIR/dotfiles"
