@@ -9,7 +9,7 @@
 dir=~/Code/dotfiles                    			
 olddir=~/.dotfiles_old                 			
 # list of files/folders to symlink in homedir
-files="vimrc gitconfig bash_profile gitignore zshrc"
+files="vimrc gitconfig bash_profile gitignore zshrc vim"
 vimdir=~/.vim/bundle
 github=https://github.com
 tempdotfiles="$TMPDIR/dotfiles"
@@ -54,11 +54,15 @@ echo "Changing to the $dir directory"
 mkdir -p $tempdotfiles
 cd $dir
 for file in $files; do
-    echo $file
+  if [ -d $file ]; then
+    echo "=== Directory - $file"
+    cp -R $file/. ~/.$file/
+  else
     if [ $backup ] && [ -e ~/.$file ]; then
-    	echo "Moving any existing dotfiles from ~ to $olddir"
-    	mv ~/.$file $olddir
+      echo "Moving any existing dotfiles from ~ to $olddir"
+      mv ~/.$file $olddir
     fi
+    echo "=== File - $file"
     if [ -e ~/.$file ]; then
       echo "~/.$file exists"
       if [ ! $backup ] && [ ! -L ~/.$file ]; then
@@ -68,16 +72,15 @@ for file in $files; do
         echo "File backed up or symlink, so removing it"
         rm ~/.$file
       fi
-	 fi
-  echo "Creating symlink to $file in home directory."
-  ln -s $dir/$file ~/.$file
+    fi
+    echo "Creating symlink to $file in home directory."
+    ln -s $dir/$file ~/.$file
+  fi
   echo
 done
 
-exit 0
-
 # reinstall vim plugins
-mkdir -p $vimdir
+mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 install_vim_package bling/vim-airline vim-airline
 install_vim_package mhinz/vim-signify vim-signify
 install_vim_package rking/ag.vim ag
