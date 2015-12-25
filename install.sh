@@ -56,7 +56,7 @@ cd $dir
 for file in $files; do
   if [ -d $file ]; then
     echo "=== Directory - $file"
-    cp -R $file/. ~/.$file/
+    cp -a $file/. ~/.$file/
   else
     if [ $backup ] && [ -e ~/.$file ]; then
       echo "Moving any existing dotfiles from ~ to $olddir"
