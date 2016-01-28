@@ -9,7 +9,7 @@
 dir=~/Code/dotfiles                    			
 olddir=~/.dotfiles_old                 			
 # list of files/folders to symlink in homedir
-files="vimrc gitconfig gitignore zshrc vim"
+files="vimrc gitconfig gitignore zshrc vim spacemacs"
 vimdir=~/.vim/bundle
 github=https://github.com
 tempdotfiles="$TMPDIR/dotfiles"
@@ -94,5 +94,9 @@ install_vim_package Shougo/neocomplete.vim.git neocomplete.vim
 install_vim_package ervandew/supertab.git supertab
 install_vim_package SirVer/ultisnips.git ultisnips
 install_vim_package majutsushi/tagbar.git tagbar
+
+if [ ! -d ~/.emacs.d ]; then
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+fi
 
 echo "Logs available at $tempdotfiles"
