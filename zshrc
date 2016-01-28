@@ -67,12 +67,28 @@ fi
 alias c='cd'
 alias crp='cd ~/Code/rstats/pander; pwd'
 alias crt='cd ~/Code/rstats/testr; pwd'
-alias cr='cd ~/Code/rstats/rjit; pwd'
-alias wb='cd ~/Writing/pi-blog; pwd'
+alias cr='cd ~/Code/rjit; pwd'
+alias wb='cd ~/Writing/blog; pwd'
 alias ww='cd ~/Writing/romantsegelskyi.github.io; pwd'
 alias wl='cd ~/Writing/lists; pwd'
 alias pr='cd ~/Code/rstats; pwd'
-alias pg='cd ~/Code/golang; pwd'
+
+## go
+alias cg='cd ~/Code/golang; pwd'
+alias csm='cd ~/Code/golang/src/smsummarizer; pwd'
+alias gbsm='go build smsummarizer'
+
+## rustdevtools
+alias crt='cd ~/Code/rusttools; pwd'
+alias cbrt='cargo build'
+run_rusttools() {
+    ~/Code/rusttools/target/debug/rusttools @_
+}
+alias rrt=run_rusttools
+
+## food app
+alias cfa='cd ~/Code/food_matching/foodapp; pwd'
+alias cfam='cd ~/Code/food_matching/foodapp_scripts; pwd'
 
 # commands
 alias mk="make -j 8"
@@ -85,10 +101,13 @@ alias reb='make clean && make -j 8'
 alias vmc='ssh -i ~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102'
 alias vmm='sshfs -o IdentityFile=~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102:/home/romantsegelskyi/ /Users/romantsegelskyi/mvm'
 alias vmu='umount /Users/romantsegelskyi/mvm'
+alias rc='ssh teamcity@reactor.ccs.neu.edu -L 8111:localhost:8111'
 
 ## testr and rjit
 alias trr="~/Code/rstats/vmr/bin/R --vanilla -e 'devtools::install(\"~/Code/rstats/testr\")'"
 
 ## update setting
 alias vz='vim ~/.zshrc'
+alias cz='cat ~/.zshrc'
 alias uz='source ~/.zshrc'
+alias vh='sudo vim /etc/hosts'
