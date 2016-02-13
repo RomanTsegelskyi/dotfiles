@@ -1,5 +1,9 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/romantsegelskyi/.oh-my-zsh
+if [ -e /Users/romants/.oh-my-zsh ]; then
+    export ZSH=/Users/romants/.oh-my-zsh
+else
+    export ZSH=/Users/romantsegelskyi/.oh-my-zsh
+fi
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -7,30 +11,8 @@ export ZSH=/Users/romantsegelskyi/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -55,11 +37,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export GOPATH=$HOME/Code/golang
 export PATH=$PATH:$GOPATH/bin
-
-# create sublime symlink
-if [ ! -e /usr/local/bin/subl ]; then
- ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-fi
 
 # aliases
 
@@ -111,3 +88,4 @@ alias vz='vim ~/.zshrc'
 alias cz='cat ~/.zshrc'
 alias uz='source ~/.zshrc'
 alias vh='sudo vim /etc/hosts'
+

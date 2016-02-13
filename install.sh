@@ -6,8 +6,8 @@
 
 ########## Variables
 
-dir=~/Code/dotfiles                    			
-olddir=~/.dotfiles_old                 			
+dir=~/Code/dotfiles
+olddir=~/.dotfiles_old
 # list of files/folders to symlink in homedir
 files="vimrc gitconfig gitignore zshrc vim spacemacs"
 vimdir=~/.vim/bundle
