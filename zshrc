@@ -76,9 +76,15 @@ alias reb='make clean && make -j 8'
 
 ## vm
 alias vmc='ssh -i ~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102'
-alias vmm='sshfs -o IdentityFile=~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102:/home/romantsegelskyi/ /Users/romantsegelskyi/mvm'
-alias vmu='umount /Users/romantsegelskyi/mvm'
+alias vmclts='ssh romantsegelskyi@192.168.99.100'
+alias vmm='sshfs -o IdentityFile=~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102:/home/romantsegelskyi/ /Users/romantsegelskyi/Mounted/ubuntu-lts'
+alias vmu='umount /Users/romantsegelskyi/Mounted/ubuntu-lts'
 alias rc='ssh teamcity@reactor.ccs.neu.edu -L 8111:localhost:8111'
+
+## work pc ssh
+alias wmc='ssh romants@romants-macdev'
+alias wmm='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Users/romants/ /Users/romantsegelskyi/Mounted/romants-macdev'
+alias wmu='umount /Users/romantsegelskyi/Mounted/romants-macdev'
 
 ## testr and rjit
 alias trr="~/Code/rstats/vmr/bin/R --vanilla -e 'devtools::install(\"~/Code/rstats/testr\")'"

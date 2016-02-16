@@ -6,7 +6,7 @@
 	"Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
 values."
-	(setq-default
+  (setq-default
 	 ;; Base distribution to use. This is a layer contained in the directory
 	 ;; `+distribution'. For now available distributions are `spacemacs-base'
 	 ;; or `spacemacs'. (default 'spacemacs)
@@ -40,7 +40,8 @@ values."
 		 (shell :variables
 						shell-default-height 30
 						shell-default-position 'bottom)
-		 spell-checking
+     spell-checking
+     shell-scripts
 		 syntax-checking
 		 version-control
 		 vim-powerline
