@@ -86,6 +86,11 @@ alias wmc='ssh romants@romants-macdev'
 alias wmm='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Users/romants/ /Users/romantsegelskyi/Mounted/romants-macdev'
 alias wmu='umount /Users/romantsegelskyi/Mounted/romants-macdev'
 
+## raspberry pi
+alias pic='ssh pi@black-pearl'
+alias pim='sshfs -o IdentityFile=~/.ssh/id_rsa pi@black-pearl:/home/pi/ /Users/romantsegelskyi/Mounted/pi'
+alias piu='umount /Users/romantsegelskyi/Mounted/pi'
+
 ## testr and rjit
 alias trr="~/Code/rstats/vmr/bin/R --vanilla -e 'devtools::install(\"~/Code/rstats/testr\")'"
 

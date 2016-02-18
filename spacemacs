@@ -236,7 +236,7 @@ values."
 	 ;; Delete whitespace while saving buffer. Possible values are `all',
 	 ;; `trailing', `changed' or `nil'. Default is `changed' (cleanup whitespace
 	 ;; on changed lines) (default 'changed)
-   dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-whitespace-cleanup 'changed
 	 ))
 
 (defun dotspacemacs/user-init ()
