@@ -28,14 +28,18 @@ values."
 		 emacs-lisp
 		 spacemacs-layouts
 		 eyebrowse
-		 semantic
+  	 semantic
+		 games
 		 git
 		 gtags
+		 github
 		 cscope
 		 markdown
 		 org
 		 osx
 		 go
+		 c-c++
+		 ranger
 		 python
 		 (shell :variables
 						shell-default-height 30
@@ -50,7 +54,7 @@ values."
 	 ;; wrapped in a layer. If you need some configuration for these
 	 ;; packages then consider to create a layer, you can also put the
 	 ;; configuration in `dotspacemacs/user-config'.
-	 dotspacemacs-additional-packages '()
+	 dotspacemacs-additional-packages '(org-habit)
 	 ;; A list of packages and/or extensions that will not be install and loaded.
 	 dotspacemacs-excluded-packages '()
 	 ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -83,7 +87,7 @@ values."
 	 ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
 	 ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
 	 ;; unchanged. (default 'vim)
-   dotspacemacs-editing-style 'hybrid
+   dotspacemacs-editing-style 'vim
 	 ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
 	 dotspacemacs-verbose-loading nil
 	 ;; Specify the startup banner. Default value is `official', it displays
@@ -244,7 +248,10 @@ values."
 
 (defun dotspacemacs/user-config ()
 	(setq evil-escape-key-sequence "jk")
-
+  (setq org-agenda-files (quote ("~/Dropbox/org"
+                                 "~/Dropbox/org/work"
+																 "~/Dropbox/org/personal"
+																 "~/Dropbox/org/projects")))
 	"Tabify python files on save. This is needed for mbu project"
 	(setq-default indent-tabs-mode t)
 	(defun indent-whole-buffer ()
@@ -256,7 +263,15 @@ values."
 		(add-hook 'before-save-hook 'indent-whole-buffer)
 		)
 	(add-hook 'python-mode-hook 'my-python-mode-hooks)
+	(load "~/Code/dotfiles/org.el")
 	)
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(org-agenda-done ((t (:foreground "#86dc2f" :height 0.8))))
+ '(org-scheduled-today ((t (:foreground "#bc6ec5" :height 1.0)))))

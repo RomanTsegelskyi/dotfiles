@@ -111,27 +111,7 @@
     # `git config --global push.default simple`. See http://git.io/mMah-w.
     default = matching
 
-# URL shorthands
-
-[url "git@github.com:"]
-
-    insteadOf = "gh:"
-    pushInsteadOf = "github:"
-    pushInsteadOf = "git://github.com/"
-
-[url "git://github.com/"]
-
-    insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-
-    insteadOf = "gst:"
-    pushInsteadOf = "gist:"
-    pushInsteadOf = "git://gist.github.com/"
-
-[url "git://gist.github.com/"]
-
-    insteadOf = "gist:"
-
-[diff]
-    name-only=true
+[github]
+	user = RomanTsegelskyi
+	password = c2gqw123
+	oauth-token = 1019ac754acfbd76e0c45fe629f4c7331c7df60f

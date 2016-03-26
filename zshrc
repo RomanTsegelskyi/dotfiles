@@ -75,16 +75,19 @@ alias ctc='ctags -R -f .tags'
 alias reb='make clean && make -j 8'
 
 ## vm
-alias vmc='ssh -i ~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102'
-alias vmclts='ssh romantsegelskyi@192.168.99.100'
-alias vmm='sshfs -o IdentityFile=~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.102:/home/romantsegelskyi/ /Users/romantsegelskyi/Mounted/ubuntu-lts'
+alias vmc='ssh romantsegelskyi@192.168.99.100'
+alias vmm='sshfs -o IdentityFile=~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.100:/home/romantsegelskyi/ /Users/romantsegelskyi/Mounted/ubuntu-lts'
 alias vmu='umount /Users/romantsegelskyi/Mounted/ubuntu-lts'
+
+# reactor machine
 alias rc='ssh teamcity@reactor.ccs.neu.edu -L 8111:localhost:8111'
 
 ## work pc ssh
 alias wmc='ssh romants@romants-macdev'
-alias wmm='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Users/romants/ /Users/romantsegelskyi/Mounted/romants-macdev'
-alias wmu='umount /Users/romantsegelskyi/Mounted/romants-macdev'
+alias wmms='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Users/romants/Source /Users/romantsegelskyi/Mounted/romants-macdev-source'
+alias wmmb='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Volumes/Builds/ /Users/romantsegelskyi/Mounted/romants-macdev-builds'
+alias wmub='umount /Users/romantsegelskyi/Mounted/romants-macdev-builds'
+alias wmus='umount /Users/romantsegelskyi/Mounted/romants-macdev-source'
 
 ## raspberry pi
 alias pic='ssh pi@black-pearl'
@@ -100,3 +103,7 @@ alias cz='cat ~/.zshrc'
 alias uz='source ~/.zshrc'
 alias vh='sudo vim /etc/hosts'
 
+## work to mac path aliases
+alias wxomx='open ~/Mounted/romants-macdev-source/sd_devmain/dev/mbu/source/omx/src/omx.xcodeproj'
+alias wxxl='open ~/Mounted/romants-macdev-source/sd_devmain/dev/xlshared/apple/project/xlshared.xcodeproj'
+alias wxxlg='open ~/Mounted/romants-macdev-builds/builds_devmain/devmain/genproj/xlshared_genproj/xlshared_genproj.xcodeproj'
