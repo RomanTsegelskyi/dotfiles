@@ -110,8 +110,3 @@
     # installations. To use `simple` instead, add this to your `~/.extra` file:
     # `git config --global push.default simple`. See http://git.io/mMah-w.
     default = matching
-
-[github]
-	user = RomanTsegelskyi
-	password = c2gqw123
-	oauth-token = 1019ac754acfbd76e0c45fe629f4c7331c7df60f
