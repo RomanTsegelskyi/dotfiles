@@ -6,7 +6,7 @@
 	"Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
 values."
-  (setq-default
+	(setq-default
 	 ;; Base distribution to use. This is a layer contained in the directory
 	 ;; `+distribution'. For now available distributions are `spacemacs-base'
 	 ;; or `spacemacs'. (default 'spacemacs)
@@ -28,8 +28,11 @@ values."
 		 emacs-lisp
 		 spacemacs-layouts
 		 eyebrowse
-  	 semantic
+		 semantic
 		 games
+		 javascript
+		 html
+		 react
 		 git
 		 gtags
 		 github
@@ -37,6 +40,7 @@ values."
 		 markdown
 		 org
 		 osx
+		 ess
 		 go
 		 c-c++
 		 ranger
@@ -44,8 +48,8 @@ values."
 		 (shell :variables
 						shell-default-height 30
 						shell-default-position 'bottom)
-     spell-checking
-     shell-scripts
+		 spell-checking
+		 shell-scripts
 		 syntax-checking
 		 version-control
 		 vim-powerline
@@ -54,7 +58,7 @@ values."
 	 ;; wrapped in a layer. If you need some configuration for these
 	 ;; packages then consider to create a layer, you can also put the
 	 ;; configuration in `dotspacemacs/user-config'.
-	 dotspacemacs-additional-packages '(org-habit)
+	 dotspacemacs-additional-packages '(editorconfig)
 	 ;; A list of packages and/or extensions that will not be install and loaded.
 	 dotspacemacs-excluded-packages '()
 	 ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -87,7 +91,7 @@ values."
 	 ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
 	 ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
 	 ;; unchanged. (default 'vim)
-   dotspacemacs-editing-style 'vim
+	 dotspacemacs-editing-style 'vim
 	 ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
 	 dotspacemacs-verbose-loading nil
 	 ;; Specify the startup banner. Default value is `official', it displays
@@ -218,7 +222,7 @@ values."
 	 ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
 	 ;; derivatives. If set to `relative', also turns on relative line numbers.
 	 ;; (default nil)
-	 dotspacemacs-line-numbers t
+	 dotspacemacs-line-numbers 'relative
 	 ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
 	 ;; (default nil)
 	 dotspacemacs-smartparens-strict-mode nil
@@ -240,7 +244,7 @@ values."
 	 ;; Delete whitespace while saving buffer. Possible values are `all',
 	 ;; `trailing', `changed' or `nil'. Default is `changed' (cleanup whitespace
 	 ;; on changed lines) (default 'changed)
-   dotspacemacs-whitespace-cleanup 'changed
+	 dotspacemacs-whitespace-cleanup nil
 	 ))
 
 (defun dotspacemacs/user-init ()
@@ -248,10 +252,7 @@ values."
 
 (defun dotspacemacs/user-config ()
 	(setq evil-escape-key-sequence "jk")
-  (setq org-agenda-files (quote ("~/Dropbox/org"
-                                 "~/Dropbox/org/work"
-																 "~/Dropbox/org/personal"
-																 "~/Dropbox/org/projects")))
+	(setq org-agenda-files (quote ("~/Dropbox/org")))
 	"Tabify python files on save. This is needed for mbu project"
 	(setq-default indent-tabs-mode t)
 	(defun indent-whole-buffer ()
@@ -264,6 +265,28 @@ values."
 		)
 	(add-hook 'python-mode-hook 'my-python-mode-hooks)
 	(load "~/Code/dotfiles/org.el")
+	(setq-default
+	 ;; js2-mode
+	 js2-basic-offset 2
+	 ;; web-mode
+	 css-indent-offset 2
+	 web-mode-markup-indent-offset 2
+	 web-mode-css-indent-offset 2
+	 web-mode-code-indent-offset 2
+	 web-mode-attr-indent-offset 2)
+	(with-eval-after-load 'web-mode
+		(add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+		(add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+		(add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+	;; use web-mode for .jsx files
+	(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+	;; disable jshint since we prefer eslint checking
+	;; (setq-default flycheck-disabled-checkers
+	;;							(append flycheck-disabled-checkers
+	;;											'(javascript-jshint)))
+
+	;; use eslint with web-mode for jsx files
+	;; (flycheck-add-mode 'javascript-eslint 'web-mode)
 	)
 
 (custom-set-faces

@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh installation.
 if [ -e /Users/romants/.oh-my-zsh ]; then
-    export ZSH=/Users/romants/.oh-my-zsh
+		export ZSH=/Users/romants/.oh-my-zsh
 else
-    export ZSH=/Users/romantsegelskyi/.oh-my-zsh
+		export ZSH=/Users/romantsegelskyi/.oh-my-zsh
 fi
 
 # Set name of the theme to load.
@@ -59,7 +59,7 @@ alias gbsm='go build smsummarizer'
 alias crt='cd ~/Code/rusttools; pwd'
 alias cbrt='cargo build'
 run_rusttools() {
-    ~/Code/rusttools/target/debug/rusttools @_
+		~/Code/rusttools/target/debug/rusttools @_
 }
 alias rrt=run_rusttools
 
@@ -107,3 +107,28 @@ alias vh='sudo vim /etc/hosts'
 alias wxomx='open ~/Mounted/romants-macdev-source/sd_devmain/dev/mbu/source/omx/src/omx.xcodeproj'
 alias wxxl='open ~/Mounted/romants-macdev-source/sd_devmain/dev/xlshared/apple/project/xlshared.xcodeproj'
 alias wxxlg='open ~/Mounted/romants-macdev-builds/builds_devmain/devmain/genproj/xlshared_genproj/xlshared_genproj.xcodeproj'
+
+## react native additions
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH="~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}"
+
+# ZSH standalone npm install autocompletion.
+_npm_install_completion() {
+		local si=$IFS
+
+		# if 'install' or 'i ' is one of the subcommands, then...
+		if [[ ${words} =~ 'install' ]] || [[ ${words} =~ 'i ' ]]; then
+
+				# add the result of `ls ~/.npm` (npm cache) as completion options
+				compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+															 COMP_LINE=$BUFFER \
+															 COMP_POINT=0 \
+															 ls ~/.npm -- "${words[@]}" \
+															 2>/dev/null)
+		fi
+
+		IFS=$si
+}
+
+compdef _npm_install_completion 'npm'
+## END ZSH npm install autocompletion

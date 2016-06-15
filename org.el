@@ -6,6 +6,8 @@
 (setq org-default-notes-file "~/Dropbox/org/refile.org")
 ;; Shortcut for capture mode
 (define-key global-map "\C-cc" 'org-capture)
+;; Shortcut for org-habit-toggle-habits
+(define-key global-map "\C-ch" 'org-habit-toggle-habits)
 ;; Wrap around lines that don't fit on the screen
 (setq org-startup-truncated nil)
 ;; default agenda span
@@ -34,9 +36,16 @@
 ;; Include current clocking task in clock reports
 (setq org-clock-report-include-clocking-task t)
 (setq bh/keep-clock-running nil)
+;; dim and enforce order
+(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-enforce-todo-dependencies t)
 ;; punch-in and punch-out
 (global-set-key (kbd "C-c i") 'org-clock-in)
 (global-set-key (kbd "C-c I") 'bh/punch-in)
+(global-set-key (kbd "C-c b") 'bh/clock-in-break-task)
+(global-set-key (kbd "C-c r") 'bh/clock-in-codereview-task)
+(global-set-key (kbd "C-c P") 'bh/clock-in-personal-organization-task)
+(global-set-key (kbd "C-c S") 'bh/clock-in-support-task)
 (global-set-key (kbd "C-c O") 'bh/punch-out)
 ;; Agenda clock report parameters
 (setq org-agenda-clockreport-parameter-plist
@@ -90,9 +99,6 @@
 (setq org-show-entry-below (quote ((default))))
 ;; show deadline early
 (setq org-deadline-warning-days 30)
-;; dimming dependent tasks
-(setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks t)
 ;; Show all future entries for repeating tasks
 (setq org-agenda-repeating-timestamp-show-all t)
 ;; Show all agenda dates - even if they are empty
@@ -106,11 +112,10 @@
 ;; Start the weekly agenda on Monday
 (setq org-agenda-start-on-weekday 1)
 ;; Enable display of the time grid so we can see the marker for the current time
-(setq org-agenda-time-grid (quote ((daily today remove-match)
-																	 #("----------------" 0 16 (org-heading t))
-																	 (0900 1100 1300 1500 1700))))
+;; (setq org-agenda-time-grid (quote ((daily today remove-match)
+;;																	 #("----------------" 0 16 (org-heading t))
+;;																	 (0900 1100 1300 1500 1700))))
 ;; habit aganda settings
-(setq org-habit-show-habits t)
 (setq org-agenda-tags-column -90)
 (setq org-habit-graph-column 45)
 (setq org-habit-preceding-days 10)
@@ -170,17 +175,32 @@
 							 ((agenda ""))
 							 ((org-agenda-span 7)
 								(org-agenda-log-mode 1)))
-							("W" "Weekly review no habits"
-							 ((agenda ""))
-							 ((org-agenda-span 7)
-								(org-agenda-log-mode 1)
-								(org-agenda-tag-filter-preset '("-HABIT"))))
-							("h" "Habits"
-							 ((agenda ""))
-							 ((org-agenda-show-log t)
-								(org-agenda-ndays 7)
-								(org-agenda-log-mode-items '(state))
-								(org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":HABIT:"))))
+							("v" "Videos"
+							 ((agenda "" nil)
+								(tags-todo "+PRV/!"
+													 ((org-agenda-overriding-header "Programming")
+														(org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+														(org-agenda-sorting-strategy
+														 '(category-keep))))
+								(tags-todo "+TED/!"
+													 ((org-agenda-overriding-header "TED")
+														(org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+														(org-agenda-sorting-strategy
+														 '(category-keep))))
+								))
+							 ("D" "Someday"
+								((tags-todo "+SOMEDAY/!"
+														((org-agenda-overriding-header "Someday tasks")
+														 (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
+														 (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
+														 (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
+														 (org-agenda-sorting-strategy
+															'(category-keep))))
+								))
 							(" " "Agenda"
 							 ((agenda "" nil)
 								(tags "REFILE"
@@ -199,7 +219,7 @@
 														(org-agenda-sorting-strategy
 														 '(priority-down todo-state-down effort-up))
 														))
-								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
+								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-SOMEDAY/!"
 													 ((org-agenda-overriding-header (concat "Project Subtasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""
@@ -210,7 +230,7 @@
 														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
 														 '(priority-down category-keep))))
-								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
+								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-SOMEDAY-PRV-TED/!"
 													 ((org-agenda-overriding-header (concat "Standalone Tasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""
@@ -232,7 +252,7 @@
 														(org-tags-match-list-sublevels 'indented)
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
-								(tags-todo "-CANCELLED+WAITING|HOLD/!"
+								(tags-todo "-CANCELLED-SOMEDAY+WAITING|HOLD/!"
 													 ((org-agenda-overriding-header (concat "Waiting and Postponed Tasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""
@@ -246,3 +266,20 @@
 											 (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
 											 (org-tags-match-list-sublevels nil))))
 							 nil))))
+;; blocking tasks
+(defun cal-org-agenda-cycle-blocked-visibility ()
+  (interactive)
+  (setq org-agenda-dim-blocked-tasks
+        (cond
+         ((eq org-agenda-dim-blocked-tasks 'invisible) nil)
+         ((eq org-agenda-dim-blocked-tasks nil) t)
+         (t 'invisible)))
+  (org-agenda-redo)
+  (message "Blocked tasks %s"
+           (cond
+            ((eq org-agenda-dim-blocked-tasks 'invisible) "omitted")
+            ((eq org-agenda-dim-blocked-tasks nil) "included")
+            (t "dimmed"))))
+
+(eval-after-load "org-agenda"
+  '(define-key org-agenda-mode-map "B" 'cal-org-agenda-cycle-blocked-visibility))
