@@ -612,9 +612,9 @@ so change the default 'F' binding in the agenda to allow both"
 				(setq bh/hide-scheduled-and-waiting-next-tasks t)
 				(error "All projects viewed.")))))
 
-;;(add-hook 'org-agenda-mode-hook
- ;;					'(lambda () (org-defkey org-agenda-mode-map "V" 'bh/view-next-project))
-	;;				'append)
+(add-hook 'org-agenda-mode-hook
+					'(lambda () (org-defkey org-agenda-mode-map "A" 'bh/view-next-project))
+					'append)
 
 ;;
 ;; Agenda sorting functions
@@ -1159,3 +1159,19 @@ current time."
 (provide 'org-habit)
 
 ;;; org-habit.el ends here
+(defun cal-org-agenda-cycle-blocked-visibility ()
+	(interactive)
+	(setq org-agenda-dim-blocked-tasks
+				(cond
+				 ((eq org-agenda-dim-blocked-tasks 'invisible) nil)
+				 ((eq org-agenda-dim-blocked-tasks nil) t)
+				 (t 'invisible)))
+	(org-agenda-redo)
+	(message "Blocked tasks %s"
+					 (cond
+						((eq org-agenda-dim-blocked-tasks 'invisible) "omitted")
+						((eq org-agenda-dim-blocked-tasks nil) "included")
+						(t "dimmed"))))
+
+(eval-after-load "org-agenda"
+	'(define-key org-agenda-mode-map "B" 'cal-org-agenda-cycle-blocked-visibility))

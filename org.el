@@ -37,14 +37,13 @@
 (setq org-clock-report-include-clocking-task t)
 (setq bh/keep-clock-running nil)
 ;; dim and enforce order
-(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-agenda-dim-blocked-tasks t)
 (setq org-enforce-todo-dependencies t)
 ;; punch-in and punch-out
 (global-set-key (kbd "C-c i") 'org-clock-in)
 (global-set-key (kbd "C-c I") 'bh/punch-in)
 (global-set-key (kbd "C-c b") 'bh/clock-in-break-task)
 (global-set-key (kbd "C-c r") 'bh/clock-in-codereview-task)
-(global-set-key (kbd "C-c P") 'bh/clock-in-personal-organization-task)
 (global-set-key (kbd "C-c S") 'bh/clock-in-support-task)
 (global-set-key (kbd "C-c O") 'bh/punch-out)
 ;; Agenda clock report parameters
@@ -177,29 +176,20 @@
 								(org-agenda-log-mode 1)))
 							("v" "Videos"
 							 ((agenda "" nil)
-								(tags-todo "+PRV/!"
+								(tags-todo "PRV"
 													 ((org-agenda-overriding-header "Programming")
-														(org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
-														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
-								(tags-todo "+TED/!"
+								(tags-todo "TED"
 													 ((org-agenda-overriding-header "TED")
-														(org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
-														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
 								))
-							 ("D" "Someday"
-								((tags-todo "+SOMEDAY/!"
-														((org-agenda-overriding-header "Someday tasks")
-														 (org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-														 (org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
-														 (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
-														 (org-agenda-sorting-strategy
-															'(category-keep))))
+							("D" "Someday"
+							 ((tags-todo "SOMEDAY"
+													 ((org-agenda-overriding-header "Someday tasks")
+														(org-agenda-sorting-strategy
+														 '(category-keep))))
 								))
 							(" " "Agenda"
 							 ((agenda "" nil)
@@ -266,20 +256,3 @@
 											 (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
 											 (org-tags-match-list-sublevels nil))))
 							 nil))))
-;; blocking tasks
-(defun cal-org-agenda-cycle-blocked-visibility ()
-  (interactive)
-  (setq org-agenda-dim-blocked-tasks
-        (cond
-         ((eq org-agenda-dim-blocked-tasks 'invisible) nil)
-         ((eq org-agenda-dim-blocked-tasks nil) t)
-         (t 'invisible)))
-  (org-agenda-redo)
-  (message "Blocked tasks %s"
-           (cond
-            ((eq org-agenda-dim-blocked-tasks 'invisible) "omitted")
-            ((eq org-agenda-dim-blocked-tasks nil) "included")
-            (t "dimmed"))))
-
-(eval-after-load "org-agenda"
-  '(define-key org-agenda-mode-map "B" 'cal-org-agenda-cycle-blocked-visibility))
