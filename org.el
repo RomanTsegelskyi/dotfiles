@@ -42,9 +42,12 @@
 ;; punch-in and punch-out
 (global-set-key (kbd "C-c i") 'org-clock-in)
 (global-set-key (kbd "C-c I") 'bh/punch-in)
-(global-set-key (kbd "C-c b") 'bh/clock-in-break-task)
-(global-set-key (kbd "C-c r") 'bh/clock-in-codereview-task)
-(global-set-key (kbd "C-c S") 'bh/clock-in-support-task)
+(global-set-key (kbd "C-c L p o") 'bh/clock-in-personal-organization-task)
+(global-set-key (kbd "C-c L w o") 'bh/clock-in-work-organization-task)
+(global-set-key (kbd "C-c L w s") 'bh/clock-in-work-support-task)
+(global-set-key (kbd "C-c L e o") 'bh/clock-in-eleken-organization-task)
+(global-set-key (kbd "C-c L e s") 'bh/clock-in-eleken-support-task)
+(global-set-key (kbd "C-c L e c") 'bh/clock-in-eleken-clients-task)
 (global-set-key (kbd "C-c O") 'bh/punch-out)
 ;; Agenda clock report parameters
 (setq org-agenda-clockreport-parameter-plist
@@ -219,7 +222,7 @@
 														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
-														 '(priority-down category-keep))))
+														 '(priority-down))))
 								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-SOMEDAY-PRV-TED/!"
 													 ((org-agenda-overriding-header (concat "Standalone Tasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
@@ -230,7 +233,7 @@
 														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
-														 '(category-keep))))
+														 '(priority-down effort-up))))
 								(tags-todo "-CANCELLED/!"
 													 ((org-agenda-overriding-header "Stuck Projects")
 														(org-agenda-skip-function 'bh/skip-non-stuck-projects)
@@ -242,15 +245,16 @@
 														(org-tags-match-list-sublevels 'indented)
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
-								(tags-todo "-CANCELLED-SOMEDAY+WAITING|HOLD/!"
-													 ((org-agenda-overriding-header (concat "Waiting and Postponed Tasks"
-																																	(if bh/hide-scheduled-and-waiting-next-tasks
-																																			""
-																																		" (including WAITING and SCHEDULED tasks)")))
+								(tags-todo "-CANCELLED+WAITING/!"
+													 ((org-agenda-overriding-header "Waiting Tasks (including SCHEDULED tasks)" )
 														(org-agenda-skip-function 'bh/skip-non-tasks)
 														(org-tags-match-list-sublevels nil)
-														(org-agenda-todo-ignore-scheduled bh/hide-scheduled-and-waiting-next-tasks)
-														(org-agenda-todo-ignore-deadlines bh/hide-scheduled-and-waiting-next-tasks)))
+                            ))
+								(tags-todo "-CANCELLED+HOLD/!"
+													 ((org-agenda-overriding-header "Postponed Tasks (including SCHEDULED tasks)" )
+														(org-agenda-skip-function 'bh/skip-non-tasks)
+														(org-tags-match-list-sublevels nil)
+                            ))
 								(tags "-REFILE/"
 											((org-agenda-overriding-header "Tasks to Archive")
 											 (org-agenda-skip-function 'bh/skip-non-archivable-tasks)

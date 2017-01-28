@@ -58,7 +58,7 @@ values."
 	 ;; wrapped in a layer. If you need some configuration for these
 	 ;; packages then consider to create a layer, you can also put the
 	 ;; configuration in `dotspacemacs/user-config'.
-	 dotspacemacs-additional-packages '(editorconfig)
+	 dotspacemacs-additional-packages '(editorconfig org-plus-contrib)
 	 ;; A list of packages and/or extensions that will not be install and loaded.
 	 dotspacemacs-excluded-packages '()
 	 ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -253,17 +253,7 @@ values."
 (defun dotspacemacs/user-config ()
 	(setq evil-escape-key-sequence "jk")
 	(setq org-agenda-files (quote ("~/Dropbox/org")))
-	"Tabify python files on save. This is needed for mbu project"
-	(setq-default indent-tabs-mode t)
-	(defun indent-whole-buffer ()
-		(message "Indent (and tabify) whole buffer")
-		(interactive)
-		(delete-trailing-whitespace)
-		(tabify (point-min) (point-max)))
-	(defun my-python-mode-hooks ()
-		(add-hook 'before-save-hook 'indent-whole-buffer)
-		)
-	(add-hook 'python-mode-hook 'my-python-mode-hooks)
+  (fset 'xterm-color-unfontify-region 'font-lock-default-unfontify-region)
 	(load "~/Code/dotfiles/org.el")
 	(setq-default
 	 ;; js2-mode
@@ -280,13 +270,6 @@ values."
 		(add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 	;; use web-mode for .jsx files
 	(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-	;; disable jshint since we prefer eslint checking
-	;; (setq-default flycheck-disabled-checkers
-	;;							(append flycheck-disabled-checkers
-	;;											'(javascript-jshint)))
-
-	;; use eslint with web-mode for jsx files
-	;; (flycheck-add-mode 'javascript-eslint 'web-mode)
 	)
 
 (custom-set-faces

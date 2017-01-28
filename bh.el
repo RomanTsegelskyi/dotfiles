@@ -24,6 +24,7 @@
 	(save-excursion
 		(set-window-start (selected-window)
 											(window-start (selected-window)))))
+(defvar bh/hide-scheduled-and-waiting-next-tasks t)
 
 (defun bh/make-org-scratch ()
 	(interactive)
@@ -48,8 +49,6 @@
 (defun org-is-habit-p (&optional pom)
 	"Is the task at POM or point a habit?"
 	(string= "habit" (org-entry-get (or pom (point)) "STYLE")))
-
-(defvar bh/hide-scheduled-and-waiting-next-tasks t)
 
 (defun bh/is-project-p ()
 	"Any task with a todo keyword subtask"
@@ -403,26 +402,17 @@ as the default task."
 					(when bh/keep-clock-running
 						(bh/clock-in-default-task)))))))
 
-(defvar bh/organization-task-id 123)
-(defvar bh/codereview-task-id 678)
-(defvar bh/personal-organization-task-id 54321)
-(defvar bh/support-task-id 11111)
-(defvar bh/break-task-id 13579)
+(defvar bh/personal-organization-task-id 111)
+(defvar bh/work-organization-task-id 211)
+(defvar bh/work-support-task-id 212)
+(defvar bh/eleken-organization-task-id 311)
+(defvar bh/eleken-support-task-id 312)
+(defvar bh/eleken-clients-task-id 313)
 (defvar bh/keep-clock-running nil)
-
-(defun bh/clock-in-support-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/support-task-id 'marker)
-		(org-clock-in '(16))))
 
 (defun bh/clock-in-organization-task-as-default ()
 	(interactive)
-	(org-with-point-at (org-id-find bh/organization-task-id 'marker)
-		(org-clock-in '(16))))
-
-(defun bh/clock-in-codereview-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/codereview-task-id 'marker)
+	(org-with-point-at (org-id-find bh/personal-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
 (defun bh/clock-in-personal-organization-task ()
@@ -430,9 +420,29 @@ as the default task."
 	(org-with-point-at (org-id-find bh/personal-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
-(defun bh/clock-in-break-task ()
+(defun bh/clock-in-work-organization-task ()
 	(interactive)
-	(org-with-point-at (org-id-find bh/break-task-id 'marker)
+	(org-with-point-at (org-id-find bh/work-organization-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defun bh/clock-in-work-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/work-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defun bh/clock-in-eleken-organization-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/eleken-organization-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defun bh/clock-in-eleken-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/eleken-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defun bh/clock-in-eleken-clients-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/eleken-clients-task-id 'marker)
 		(org-clock-in '(16))))
 
 (defun bh/clock-out-maybe ()

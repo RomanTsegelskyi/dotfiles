@@ -132,3 +132,4 @@ _npm_install_completion() {
 
 compdef _npm_install_completion 'npm'
 ## END ZSH npm install autocompletion
+export PATH=$PATH:/Users/romantsegelskyi/Library/Android/sdk/platform-tools/
