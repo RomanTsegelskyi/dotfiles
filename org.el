@@ -1,4 +1,5 @@
 ;; Org mode configurations
+(require 'org-checklist)
 ;; Load bh-functions from http://doc.norang.ca/org-mode.html
 (load "~/Code/dotfiles/bh.el")
 ;; Directory and refile location
