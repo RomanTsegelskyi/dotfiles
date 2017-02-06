@@ -1,5 +1,15 @@
 ;; Org mode configurations
 (require 'org-checklist)
+;; org autoindent
+(require 'org-indent)
+(setq org-startup-indented t)
+(setq org-startup-truncated t)
+;; skip scheduled and deadline tasks if they are done
+(setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-skip-deadline-if-done t)
+;; org-protocol setup
+(server-start)
+(require 'org-protocol)
 ;; Load bh-functions from http://doc.norang.ca/org-mode.html
 (load "~/Code/dotfiles/bh.el")
 ;; Directory and refile location
@@ -152,23 +162,19 @@
 ;; TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
 			(quote (("t" "todo" entry (file "~/Dropbox/org/refile.org")
-							 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+							 "* TODO %?\n" :clock-in t :clock-resume t)
 							("r" "respond" entry (file "~/Dropbox/org/refile.org")
 							 "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
 							("n" "note" entry (file "~/Dropbox/org/refile.org")
-							 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-							("j" "Journal" entry (file+datetree "~/Dropbox/org/diary.org")
-							 "* %?\n%U\n" :clock-in t :clock-resume t)
-							("T" "Thankful for" entry (file+datetree "~/Dropbox/org/diary.org")
-							 "* %? :TF:\n%U\n")
-							("w" "org-protocol" entry (file "~/Dropbox/org/refile.org")
-							 "* TODO Review %c\n%U\n" :immediate-finish t)
+							 "* %? :NOTE:\n" :clock-in t :clock-resume t)
+							("L" "org-protocol" entry (file "~/Dropbox/org/refile.org")
+							 "* TODO Review %a\n" :immediate-finish t)
 							("m" "Meeting" entry (file "~/Dropbox/org/refile.org")
-							 "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+							 "* MEETING with %? :MEETING:\n" :clock-in t :clock-resume t)
 							("p" "Phone call" entry (file "~/Dropbox/org/refile.org")
-							 "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+							 "* PHONE %? :PHONE:\n" :clock-in t :clock-resume t)
 							("h" "Habit" entry (file "~/Dropbox/org/refile.org")
-							 "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+							 "* NEXT %?\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 ;; Custom agenda command definitions
 (setq org-agenda-custom-commands
 			(quote (("N" "Notes" tags "NOTE"
@@ -179,13 +185,16 @@
 							 ((org-agenda-span 7)
 								(org-agenda-log-mode 1)))
 							("v" "Videos"
-							 ((agenda "" nil)
-								(tags-todo "PRV"
+							 ((tags-todo "PRV"
 													 ((org-agenda-overriding-header "Programming")
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
 								(tags-todo "TED"
 													 ((org-agenda-overriding-header "TED")
+														(org-agenda-sorting-strategy
+														 '(category-keep))))
+								(tags-todo "MSV"
+													 ((org-agenda-overriding-header "MOVIES/SHOWS")
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
 								))
@@ -213,7 +222,7 @@
 														(org-agenda-sorting-strategy
 														 '(priority-down todo-state-down effort-up))
 														))
-								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-SOMEDAY/!"
+								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-VIDEO/!"
 													 ((org-agenda-overriding-header (concat "Project Subtasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""
@@ -224,7 +233,7 @@
 														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
 														 '(priority-down))))
-								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-SOMEDAY-PRV-TED/!"
+								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-VIDEO/!"
 													 ((org-agenda-overriding-header (concat "Standalone Tasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""

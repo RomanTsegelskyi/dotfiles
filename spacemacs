@@ -27,24 +27,18 @@ values."
 		 better-defaults
 		 emacs-lisp
 		 spacemacs-layouts
-		 eyebrowse
 		 semantic
-		 games
 		 javascript
 		 html
 		 react
 		 git
-		 gtags
+     yaml
 		 github
-		 cscope
 		 markdown
 		 org
 		 osx
 		 ess
-		 go
-		 c-c++
 		 ranger
-		 python
 		 (shell :variables
 						shell-default-height 30
 						shell-default-position 'bottom)
@@ -123,7 +117,7 @@ values."
 	 ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
 	 ;; size to make separators look not too crappy.
 	 dotspacemacs-default-font '("Source Code Pro"
-															 :size 13
+															 :size 12
 															 :weight normal
 															 :width normal
 															 :powerline-scale 1.1)
@@ -281,3 +275,9 @@ values."
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(org-agenda-done ((t (:foreground "#86dc2f" :height 0.8))))
  '(org-scheduled-today ((t (:foreground "#bc6ec5" :height 1.0)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-startup-truncated t))

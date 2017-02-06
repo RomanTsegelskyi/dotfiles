@@ -362,7 +362,7 @@ as the default task."
 			;;
 			(let* ((marker (org-get-at-bol 'org-hd-marker))
 						 (tags (org-with-point-at marker (org-get-tags-at))))
-				(if (and (eq arg 4) tags)
+				(if (and (eq arg 1) tags)
 						(org-agenda-clock-in '(16))
 					(bh/clock-in-organization-task-as-default)))
 		;;
@@ -371,7 +371,7 @@ as the default task."
 		(save-restriction
 			(widen)
 			; Find the tags on the current task
-			(if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 4))
+			(if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 1))
 					(org-clock-in '(16))
 				(bh/clock-in-organization-task-as-default)))))
 
