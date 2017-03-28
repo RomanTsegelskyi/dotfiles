@@ -17,16 +17,19 @@ set smartindent			" improved autoindent
 set cindent				" special indent rules for C
 set number              " show line numbers
 set showcmd             " show command in bottom bar
-set cursorline          " highlight current line
+if ('mac') || has('unix')
+    set cursorline          " highlight current line
+endif
 set showmatch			" highlight matching [{()}]
 set lazyredraw          " redraw only when we need to.
 
 set backspace=indent,eol,start
 
 " Different cursor in different modes
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
+if has('mac') || has ('unix')
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 " }}}
 " => Completion {{{
 set wildmode=list:longest
@@ -46,7 +49,9 @@ let g:neocomplete#enable_at_startup = 1
 " }}}
 " => Launch Config {{{
 call pathogen#infect()                      " use pathogen
-autocmd VimEnter * call AirlineInit()       " initialize airline
+if has('mac') || has ('unix') 
+  autocmd VimEnter * call AirlineInit()       " initialize airline
+endif
 " }}}
 " => Searching {{{
 set incsearch           " search as characters are entered
