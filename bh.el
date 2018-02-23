@@ -403,11 +403,9 @@ as the default task."
 						(bh/clock-in-default-task)))))))
 
 (defvar bh/personal-organization-task-id 111)
-(defvar bh/work-organization-task-id 211)
-(defvar bh/work-support-task-id 212)
+(defvar bh/microsoft-organization-task-id 211)
 (defvar bh/eleken-organization-task-id 311)
-(defvar bh/eleken-support-task-id 312)
-(defvar bh/eleken-clients-task-id 313)
+(defvar bh/globalid-organization-task-id 411)
 (defvar bh/keep-clock-running nil)
 
 (defun bh/clock-in-organization-task-as-default ()
@@ -420,14 +418,9 @@ as the default task."
 	(org-with-point-at (org-id-find bh/personal-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
-(defun bh/clock-in-work-organization-task ()
+(defun bh/clock-in-microsoft-organization-task ()
 	(interactive)
-	(org-with-point-at (org-id-find bh/work-organization-task-id 'marker)
-		(org-clock-in '(16))))
-
-(defun bh/clock-in-work-support-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/work-support-task-id 'marker)
+	(org-with-point-at (org-id-find bh/microsoft-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
 (defun bh/clock-in-eleken-organization-task ()
@@ -435,14 +428,9 @@ as the default task."
 	(org-with-point-at (org-id-find bh/eleken-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
-(defun bh/clock-in-eleken-support-task ()
+(defun bh/clock-in-globalid-organization-task ()
 	(interactive)
-	(org-with-point-at (org-id-find bh/eleken-support-task-id 'marker)
-		(org-clock-in '(16))))
-
-(defun bh/clock-in-eleken-clients-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/eleken-clients-task-id 'marker)
+	(org-with-point-at (org-id-find bh/globalid-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
 (defun bh/clock-out-maybe ()

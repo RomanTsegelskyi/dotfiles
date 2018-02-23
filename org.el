@@ -26,6 +26,7 @@
 ;; Resume clocking task when emacs is restarted
 (org-clock-persistence-insinuate)
 ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+
 (setq org-clock-history-length 23)
 ;; Resume clocking task on clock-in if the clock is open
 (setq org-clock-in-resume t)
@@ -48,17 +49,15 @@
 (setq org-clock-report-include-clocking-task t)
 (setq bh/keep-clock-running nil)
 ;; dim and enforce order
-(setq org-agenda-dim-blocked-tasks t)
+(setq org-agenda-dim-blocked-tasks 'invisible)
 (setq org-enforce-todo-dependencies t)
 ;; punch-in and punch-out
 (global-set-key (kbd "C-c i") 'org-clock-in)
 (global-set-key (kbd "C-c I") 'bh/punch-in)
 (global-set-key (kbd "C-c L p o") 'bh/clock-in-personal-organization-task)
-(global-set-key (kbd "C-c L w o") 'bh/clock-in-work-organization-task)
-(global-set-key (kbd "C-c L w s") 'bh/clock-in-work-support-task)
+(global-set-key (kbd "C-c L m o") 'bh/clock-in-microsoft-organization-task)
 (global-set-key (kbd "C-c L e o") 'bh/clock-in-eleken-organization-task)
-(global-set-key (kbd "C-c L e s") 'bh/clock-in-eleken-support-task)
-(global-set-key (kbd "C-c L e c") 'bh/clock-in-eleken-clients-task)
+(global-set-key (kbd "C-c L g o") 'bh/clock-in-globalid-organization-task)
 (global-set-key (kbd "C-c O") 'bh/punch-out)
 ;; Agenda clock report parameters
 (setq org-agenda-clockreport-parameter-plist
@@ -67,19 +66,19 @@
 (setq org-columns-default-format "%50ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
 ;; global Effort estimate values
 ;; global STYLE property values for completion
-(setq org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+(setq org-global-properties (quote (("Effort_ALL" . "0:05 0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
 																		("STYLE_ALL" . "habit"))))
 ;; Tags with fast selection keys
 (setq org-tag-alist (quote (("WAITING" . ?w)
 														("HOLD" . ?h)
-														("PROJECTS" . ?p)
+														("ELEKEN" . ?E)
 														("PERSONAL" . ?P)
-														("WORK" . ?W)
-														("ORG" . ?O)
+														("MICROSOFT" . ?M)
+														("GLOBALID" . ?G)
+														("ESTIMATE" . ?e)
 														("NOTE" . ?n)
-														("SHORT" . ?s)
-														("CANCELLED" . ?c)
-														("FLAGGED" . ??))))
+														("DOWNTIME" . ?d)
+                            )))
 ;; Allow setting single tags without the menu
 (setq org-fast-tag-selection-single-key (quote expert))
 ;; For tag searches ignore tasks with scheduled and deadline dates
@@ -161,8 +160,17 @@
 ;; Capture templates for:
 ;; TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
-			(quote (("t" "todo" entry (file "~/Dropbox/org/refile.org")
+			(quote (
+              ("t" "todo" entry (file "~/Dropbox/org/refile.org")
 							 "* TODO %?\n" :clock-in t :clock-resume t)
+              ("P" "todo-personal" entry (file "~/Dropbox/org/refile.org")
+							 "* TODO %? :PERSONAL:\nSCHEDULED: %t\n%U\n" :clock-in t :clock-resume t)
+              ("M" "todo-microsoft" entry (file "~/Dropbox/org/refile.org")
+							 "* TODO %? :MICROSOFT:\nSCHEDULED: %t\n%U\n" :clock-in t :clock-resume t)
+              ("E" "todo-eleken" entry (file "~/Dropbox/org/refile.org")
+							 "* TODO %? :ELEKEN:\nSCHEDULED: %t\n%U\n" :clock-in t :clock-resume t)
+              ("G" "todo-globalid" entry (file "~/Dropbox/org/refile.org")
+							 "* TODO %? :GLOBALID:\nSCHEDULED: %t\n%U\n" :clock-in t :clock-resume t)
 							("r" "respond" entry (file "~/Dropbox/org/refile.org")
 							 "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
 							("n" "note" entry (file "~/Dropbox/org/refile.org")
@@ -184,26 +192,6 @@
 							 ((agenda ""))
 							 ((org-agenda-span 7)
 								(org-agenda-log-mode 1)))
-							("v" "Videos"
-							 ((tags-todo "PRV"
-													 ((org-agenda-overriding-header "Programming")
-														(org-agenda-sorting-strategy
-														 '(category-keep))))
-								(tags-todo "TED"
-													 ((org-agenda-overriding-header "TED")
-														(org-agenda-sorting-strategy
-														 '(category-keep))))
-								(tags-todo "MSV"
-													 ((org-agenda-overriding-header "MOVIES/SHOWS")
-														(org-agenda-sorting-strategy
-														 '(category-keep))))
-								))
-							("D" "Someday"
-							 ((tags-todo "SOMEDAY"
-													 ((org-agenda-overriding-header "Someday tasks")
-														(org-agenda-sorting-strategy
-														 '(category-keep))))
-								))
 							(" " "Agenda"
 							 ((agenda "" nil)
 								(tags "REFILE"
@@ -222,7 +210,7 @@
 														(org-agenda-sorting-strategy
 														 '(priority-down todo-state-down effort-up))
 														))
-								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-VIDEO/!"
+								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
 													 ((org-agenda-overriding-header (concat "Project Subtasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""
@@ -233,7 +221,7 @@
 														(org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 														(org-agenda-sorting-strategy
 														 '(priority-down))))
-								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD-VIDEO/!"
+								(tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
 													 ((org-agenda-overriding-header (concat "Standalone Tasks"
 																																	(if bh/hide-scheduled-and-waiting-next-tasks
 																																			""
@@ -247,12 +235,6 @@
 								(tags-todo "-CANCELLED/!"
 													 ((org-agenda-overriding-header "Stuck Projects")
 														(org-agenda-skip-function 'bh/skip-non-stuck-projects)
-														(org-agenda-sorting-strategy
-														 '(category-keep))))
-								(tags-todo "-HOLD-CANCELLED/!"
-													 ((org-agenda-overriding-header "Projects")
-														(org-agenda-skip-function 'bh/skip-non-projects)
-														(org-tags-match-list-sublevels 'indented)
 														(org-agenda-sorting-strategy
 														 '(category-keep))))
 								(tags-todo "-CANCELLED+WAITING/!"

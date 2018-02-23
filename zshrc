@@ -133,3 +133,10 @@ _npm_install_completion() {
 compdef _npm_install_completion 'npm'
 ## END ZSH npm install autocompletion
 export PATH=$PATH:/Users/romantsegelskyi/Library/Android/sdk/platform-tools/
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+export NVM_DIR="/Users/romantsegelskyi/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

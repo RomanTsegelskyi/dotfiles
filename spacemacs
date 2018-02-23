@@ -37,6 +37,7 @@ values."
 		 markdown
 		 org
 		 osx
+     mu4e
 		 ess
 		 ranger
 		 (shell :variables
@@ -46,7 +47,6 @@ values."
 		 shell-scripts
 		 syntax-checking
 		 version-control
-		 vim-powerline
 		 )
 	 ;; List of additional packages that will be installed without being
 	 ;; wrapped in a layer. If you need some configuration for these
@@ -273,6 +273,8 @@ values."
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(org-agenda-date ((t (:foreground "#7590db" :height 1.0))))
+ '(org-agenda-date-today ((t (:foreground "#4f97d7" :height 1.0))))
  '(org-agenda-done ((t (:foreground "#86dc2f" :height 0.8))))
  '(org-scheduled-today ((t (:foreground "#bc6ec5" :height 1.0)))))
 (custom-set-variables
@@ -280,4 +282,19 @@ values."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-cmp-user-defined (quote bh/agenda-sort))
+ '(org-agenda-compact-blocks t)
+ '(org-agenda-files (quote ("~/Dropbox/org")))
+ '(org-agenda-restore-windows-after-quit t)
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-sorting-strategy
+   (quote
+    ((agenda habit-down time-up user-defined-up priority-down effort-up category-keep)
+     (todo category-up effort-up)
+     (tags category-up effort-up)
+     (search category-up))))
+ '(org-agenda-span 1)
+ '(org-agenda-tags-column -90)
+ '(org-agenda-tags-todo-honor-ignore-options t)
  '(org-startup-truncated t))
