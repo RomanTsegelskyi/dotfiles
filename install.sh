@@ -8,7 +8,7 @@
 
 # list of files/folders to symlink in homedir
 FILES="vimrc gitconfig gitignore zshrc vim spacemacs"
-DIR=~/Code/dotfiles
+DIR=~/code/personal/dotfiles
 OLDDIR=~/.dotfiles_old
 VIMDIR=~/.vim/bundle
 GITHUB=https://github.com
@@ -30,7 +30,7 @@ link() {
 				fi
 		else
 				# ln's parameters are backwards.
-				ln -s "$target" "$link"
+				ln -shf "$target" "$link"
 		fi
 }
 

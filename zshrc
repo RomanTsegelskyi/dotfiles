@@ -26,76 +26,26 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(git gitfast git-extras brew command-not-found common-aliases docker history osx)
 
 # User configuration
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Library/TeX/texbin"
-
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 
 source $ZSH/oh-my-zsh.sh
 
-# go
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$HOME/Code/golang
-export PATH=$PATH:$GOPATH/bin
-
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 # aliases
+# python3 to python
+# alias python=/usr/local/bin/python3
+# alias pip=/usr/local/bin/pip3
 
 ## dir aliases
 alias c='cd'
-alias crp='cd ~/Code/rstats/pander; pwd'
-alias crt='cd ~/Code/rstats/testr; pwd'
-alias cr='cd ~/Code/rjit; pwd'
-alias wb='cd ~/Writing/blog; pwd'
-alias ww='cd ~/Writing/romantsegelskyi.github.io; pwd'
-alias wl='cd ~/Writing/lists; pwd'
-alias pr='cd ~/Code/rstats; pwd'
 
-## go
-alias cg='cd ~/Code/golang; pwd'
-alias csm='cd ~/Code/golang/src/smsummarizer; pwd'
-alias gbsm='go build smsummarizer'
-
-## rustdevtools
-alias crt='cd ~/Code/rusttools; pwd'
-alias cbrt='cargo build'
-run_rusttools() {
-		~/Code/rusttools/target/debug/rusttools @_
-}
-alias rrt=run_rusttools
-
-## food app
-alias cfa='cd ~/Code/food_matching/foodapp; pwd'
-alias cfam='cd ~/Code/food_matching/foodapp_scripts; pwd'
-
-# commands
-alias mk="make -j 8"
-alias ..='cd ..'
-alias c='clear'
-alias ctc='ctags -R -f .tags'
-alias reb='make clean && make -j 8'
-
-## vm
-alias vmc='ssh romantsegelskyi@192.168.99.100'
-alias vmm='sshfs -o IdentityFile=~/.ssh/myserver_id_rsa romantsegelskyi@192.168.99.100:/home/romantsegelskyi/ /Users/romantsegelskyi/Mounted/ubuntu-lts'
-alias vmu='umount /Users/romantsegelskyi/Mounted/ubuntu-lts'
-
-# reactor machine
-alias rc='ssh teamcity@reactor.ccs.neu.edu -L 8111:localhost:8111'
-
-## work pc ssh
-alias wmc='ssh romants@romants-macdev'
-alias wmms='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Users/romants/Source /Users/romantsegelskyi/Mounted/romants-macdev-source'
-alias wmmb='sshfs -o IdentityFile=~/.ssh/id_rsa romants@romants-macdev:/Volumes/Builds/ /Users/romantsegelskyi/Mounted/romants-macdev-builds'
-alias wmub='umount /Users/romantsegelskyi/Mounted/romants-macdev-builds'
-alias wmus='umount /Users/romantsegelskyi/Mounted/romants-macdev-source'
-
-## raspberry pi
-alias pic='ssh pi@black-pearl'
-alias pim='sshfs -o IdentityFile=~/.ssh/id_rsa pi@black-pearl:/home/pi/ /Users/romantsegelskyi/Mounted/pi'
-alias piu='umount /Users/romantsegelskyi/Mounted/pi'
-
-## testr and rjit
-alias trr="~/Code/rstats/vmr/bin/R --vanilla -e 'devtools::install(\"~/Code/rstats/testr\")'"
+## ccache
+export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+export CCACHE_FILECLONE=true
+export CCACHE_DEPEND=true
+export CCACHE_INODECACHE=true
 
 ## update setting
 alias vz='vim ~/.zshrc'
@@ -103,14 +53,12 @@ alias cz='cat ~/.zshrc'
 alias uz='source ~/.zshrc'
 alias vh='sudo vim /etc/hosts'
 
-## work to mac path aliases
-alias wxomx='open ~/Mounted/romants-macdev-source/sd_devmain/dev/mbu/source/omx/src/omx.xcodeproj'
-alias wxxl='open ~/Mounted/romants-macdev-source/sd_devmain/dev/xlshared/apple/project/xlshared.xcodeproj'
-alias wxxlg='open ~/Mounted/romants-macdev-builds/builds_devmain/devmain/genproj/xlshared_genproj/xlshared_genproj.xcodeproj'
-
 ## react native additions
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH="~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}"
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export JAVA_HOME=/usr/local/opt/openjdk@11
+export PATH=$JAVA_HOME/bin:$PATH
 
 # ZSH standalone npm install autocompletion.
 _npm_install_completion() {
@@ -140,3 +88,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export NVM_DIR="/Users/romantsegelskyi/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/usr/local/sbin:$PATH"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/usr/local/opt/postgresql@10/bin:$PATH"

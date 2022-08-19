@@ -403,9 +403,100 @@ as the default task."
 						(bh/clock-in-default-task)))))))
 
 (defvar bh/personal-organization-task-id 111)
-(defvar bh/microsoft-organization-task-id 211)
-(defvar bh/eleken-organization-task-id 311)
-(defvar bh/globalid-organization-task-id 411)
+
+;; company activities
+(defvar bh/kalon-organization-task-id 201)
+(defun bh/clock-in-kalon-organization-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-organization-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-admin-support-task-id 2001)
+(defun bh/clock-in-kalon-admin-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-admin-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-admin-office-task-id 2002)
+(defun bh/clock-in-kalon-admin-office-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-admin-office-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-dev-support-task-id 2201)
+(defun bh/clock-in-kalon-dev-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-dev-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-finances-support-task-id 2301)
+(defun bh/clock-in-kalon-finances-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-finances-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-sales-support-task-id 2401)
+(defun bh/clock-in-kalon-sales-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-sales-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-hr-support-task-id 2501)
+(defun bh/clock-in-kalon-hr-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-hr-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-marketing-support-task-id 2601)
+(defun bh/clock-in-kalon-marketing-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/eleken-marketing-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+;; projects
+(defvar bh/kalon-projects-support-task-id 2101)
+(defun bh/clock-in-kalon-projects-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-projects-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-handprinter-support-task-id 2111)
+(defun bh/clock-in-kalon-handprinter-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-handprinter-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-savewave-support-task-id 2121)
+(defun bh/clock-in-kalon-savewave-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-savewave-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-shdb-support-task-id 2131)
+(defun bh/clock-in-kalon-shdb-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-shdb-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-bytelyfe-support-task-id 2141)
+(defun bh/clock-in-kalon-bytelyfe-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-bytelyfe-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-sharelink-support-task-id 2151)
+(defun bh/clock-in-kalon-sharelink-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-sharelink-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+(defvar bh/kalon-wavecut-support-task-id 2161)
+(defun bh/clock-in-kalon-wavecut-support-task ()
+	(interactive)
+	(org-with-point-at (org-id-find bh/kalon-wavecut-support-task-id 'marker)
+		(org-clock-in '(16))))
+
+;; general config
 (defvar bh/keep-clock-running nil)
 
 (defun bh/clock-in-organization-task-as-default ()
@@ -416,21 +507,6 @@ as the default task."
 (defun bh/clock-in-personal-organization-task ()
 	(interactive)
 	(org-with-point-at (org-id-find bh/personal-organization-task-id 'marker)
-		(org-clock-in '(16))))
-
-(defun bh/clock-in-microsoft-organization-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/microsoft-organization-task-id 'marker)
-		(org-clock-in '(16))))
-
-(defun bh/clock-in-eleken-organization-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/eleken-organization-task-id 'marker)
-		(org-clock-in '(16))))
-
-(defun bh/clock-in-globalid-organization-task ()
-	(interactive)
-	(org-with-point-at (org-id-find bh/globalid-organization-task-id 'marker)
 		(org-clock-in '(16))))
 
 (defun bh/clock-out-maybe ()
