@@ -140,9 +140,9 @@ main() {
 		install_vim_package majutsushi/tagbar.git tagbar
 
 		# install spacemacs if it is missing
-		if [ ! -d ~/.emacs.d ]; then
-				git clone $GITHUB/syl20bnr/spacemacs ~/.emacs.d
-		fi
+#		if [ ! -d ~/.emacs.d ]; then
+#				git clone $GITHUB/syl20bnr/spacemacs ~/.emacs.d
+#		fi
 
 		echo "Logs available at $TEMPDIR"
 }
