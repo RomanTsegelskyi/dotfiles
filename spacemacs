@@ -247,7 +247,18 @@ values."
 	 web-mode-css-indent-offset 2
 	 web-mode-code-indent-offset 2
 	 web-mode-attr-indent-offset 2)
-	(with-eval-after-load 'web-mode
+  (cond ((eq system-type 'windows-nt)
+         (setenv "PATH"
+                 (concat
+                  "C:/cygwin64/usr/local/bin" ";"
+                  "C:/cygwin64/usr/bin" ";"
+                  "C:/cygwin64/bin" ";"
+                  (getenv "PATH")
+                  )
+                 )
+         )
+        )
+  (with-eval-after-load 'web-mode
 		(add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
 		(add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
 		(add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
